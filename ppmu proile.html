@@ -1,0 +1,2301 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YPPMU - Yayasan Pondok Pesantren Minhadlul Ulum</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Amiri:wght@400;700&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            emerald: { 50: '#ecfdf5', 100: '#d1fae5', 200: '#a7f3d0', 300: '#6ee7b7', 400: '#34d399', 500: '#10b981', 600: '#059669', 700: '#047857', 800: '#065f46', 900: '#064e3b', 950: '#022c22' },
+            cream: { 50: '#FFFDF7', 100: '#FAF7F0', 200: '#F5F0E8', 300: '#EDE5D8' },
+            gold: { 50: '#FFF9E6', 100: '#FFF0BF', 200: '#FFE699', 300: '#FFD966', 400: '#FFCC33', 500: '#D4A853', 600: '#C9952A', 700: '#B8860B', 800: '#8B6914', 900: '#6B4F10' }
+          },
+          fontFamily: {
+            jakarta: ['Plus Jakarta Sans', 'sans-serif'],
+            amiri: ['Amiri', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #FAF7F0;
+      color: #064e3b;
+    }
+
+    /* Gold Shimmer Animation */
+    @keyframes goldShimmer {
+      0% {
+        background-position: -200% center;
+      }
+
+      100% {
+        background-position: 200% center;
+      }
+    }
+
+    .gold-shimmer {
+      background: linear-gradient(90deg, #B8860B, #FFD700, #FFF8DC, #FFD700, #B8860B, #FFD700, #B8860B);
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: goldShimmer 4s linear infinite;
+    }
+
+    /* Fade In Up */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    /* Float Animation */
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-20px) rotate(3deg);
+      }
+    }
+
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .animate-float-delay {
+      animation: float 7s ease-in-out 1s infinite;
+    }
+
+    /* Spin Slow */
+    @keyframes spinSlow {
+      from {
+        transform: rotate(0deg)
+      }
+
+      to {
+        transform: rotate(360deg)
+      }
+    }
+
+    .animate-spin-slow {
+      animation: spinSlow 30s linear infinite;
+    }
+
+    /* Pulse Glow */
+    @keyframes pulseGlow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 20px rgba(212, 168, 83, 0.2);
+      }
+
+      50% {
+        box-shadow: 0 0 40px rgba(212, 168, 83, 0.4);
+      }
+    }
+
+    .animate-pulse-glow {
+      animation: pulseGlow 3s ease-in-out infinite;
+    }
+
+    /* Arabic Pattern SVG */
+    .arabesque-bg {
+      background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23D4A853' stroke-width='0.5' opacity='0.15'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40Z'/%3E%3Ccircle cx='40' cy='40' r='20'/%3E%3Cpath d='M20 0 L60 0 L80 20 L80 60 L60 80 L20 80 L0 60 L0 20Z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .arabesque-dark {
+      background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23D4A853' stroke-width='0.5' opacity='0.1'%3E%3Cpath d='M40 0 L80 40 L40 80 L0 40Z'/%3E%3Ccircle cx='40' cy='40' r='20'/%3E%3Cpath d='M20 0 L60 0 L80 20 L80 60 L60 80 L20 80 L0 60 L0 20Z'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* Islamic Geometric Border */
+    .islamic-border {
+      border-image: repeating-linear-gradient(45deg, #D4A853 0px, #D4A853 2px, transparent 2px, transparent 8px) 10;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Video overlay */
+    .video-overlay {
+      background: linear-gradient(135deg, rgba(6, 78, 59, 0.85) 0%, rgba(6, 95, 70, 0.7) 50%, rgba(4, 120, 87, 0.6) 100%);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #FAF7F0;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #D4A853;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B8860B;
+    }
+
+    /* Gallery lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      transform: translateX(150%);
+      transition: transform 0.4s ease;
+    }
+
+    .toast.show {
+      transform: translateX(0);
+    }
+
+    /* Nav active */
+    .nav-link.active {
+      color: #D4A853 !important;
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 2px;
+      background: #D4A853;
+      border-radius: 1px;
+    }
+
+    /* Warm filter for images */
+    .warm-filter {
+      filter: sepia(15%) saturate(120%) brightness(105%);
+    }
+
+    /* Timeline line */
+    .timeline-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, #D4A853, #047857, #D4A853, transparent);
+      transform: translateX(-50%);
+    }
+
+    @media (max-width:768px) {
+      .timeline-line {
+        left: 20px;
+      }
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    /* Counter animation */
+    .counter {
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body class="font-jakarta">
+
+  <!-- NAVIGATION -->
+  <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#hero" class="flex items-center gap-3">
+        <div
+          class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-700 to-emerald-900 flex items-center justify-center border-2 border-gold-500 animate-pulse-glow">
+          <span class="font-amiri text-white text-lg font-bold"><img src="images/PPMU.png" alt=""></span>
+        </div>
+        <div class="hidden sm:block">
+          <p class="text-sm font-bold text-emerald-700 leading-tight">YAYASAN PONDOK PESANTREN</p>
+          <p class="text-xs FO text-emerald-900">MINHADLUL ULUM</p>
+        </div>
+      </a>
+      <div class="hidden lg:flex items-center gap-8">
+        <a href="#hero"
+          class="nav-link relative text-sm font-semibold text-emerald-800 hover:text-gold-600 transition-colors">Beranda</a>
+        <a href="#tentang"
+          class="nav-link relative text-sm font-semibold text-emerald-800 hover:text-gold-600 transition-colors">Tentang</a>
+        <a href="#program"
+          class="nav-link relative text-sm font-semibold text-emerald-800 hover:text-gold-600 transition-colors">Program</a>
+        <a href="#fasilitas"
+          class="nav-link relative text-sm font-semibold text-emerald-800 hover:text-gold-600 transition-colors">Fasilitas</a>
+        <a href="#kegiatan"
+          class="nav-link relative text-sm font-semibold text-emerald-800 hover:text-gold-600 transition-colors">Kegiatan</a>
+        <a href="https://s.id/SPMBYPPMU99" target="_blank"
+          class="px-6 py-2.5 bg-gradient-to-r from-emerald-700 to-emerald-800 text-white text-sm font-semibold rounded-full hover:from-emerald-800 hover:to-emerald-900 transition-all shadow-lg hover:shadow-xl hover:scale-105">
+          Daftar Sekarang
+        </a>
+      </div>
+      <button id="menuBtn" class="lg:hidden p-2 rounded-lg hover:bg-emerald-100 transition-colors">
+        <i data-lucide="menu" class="w-6 h-6 text-emerald-800"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 w-72 h-full bg-cream-50 shadow-2xl z-[60] p-8">
+    <button id="closeMenu" class="absolute top-4 right-4 p-2 rounded-lg hover:bg-emerald-100">
+      <i data-lucide="x" class="w-6 h-6 text-emerald-800"></i>
+    </button>
+    <div class="mt-16 flex flex-col gap-6">
+      <a href="#hero"
+        class="mobile-link text-lg font-semibold text-emerald-800 hover:text-gold-600 transition-colors">Beranda</a>
+      <a href="#tentang"
+        class="mobile-link text-lg font-semibold text-emerald-800 hover:text-gold-600 transition-colors">Tentang</a>
+      <a href="#program"
+        class="mobile-link text-lg font-semibold text-emerald-800 hover:text-gold-600 transition-colors">Program</a>
+      <a href="#fasilitas"
+        class="mobile-link text-lg font-semibold text-emerald-800 hover:text-gold-600 transition-colors">Fasilitas</a>
+      <a href="#kegiatan"
+        class="mobile-link text-lg font-semibold text-emerald-800 hover:text-gold-600 transition-colors">Kegiatan</a>
+      <a href="https://s.id/SPMBYPPMU99" target="_blank"
+        class="mt-4 px-6 py-3 bg-gradient-to-r from-emerald-700 to-emerald-800 text-white text-center font-semibold rounded-full">Daftar
+        Sekarang</a>
+    </div>
+  </div>
+  <div id="menuOverlay" class="fixed inset-0 bg-black/40 z-[55] hidden"></div>
+
+  <!-- HERO SECTION -->
+  <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Video Background -->
+    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover"
+      poster="https://picsum.photos/seed/mosque-hero/1920/1080.jpg">
+      <source src="videos/droun.mp4" type="video/mp4">
+    </video>
+    <!-- Overlay -->
+    <div class="video-overlay absolute inset-0"></div>
+    <!-- Decorative Ornaments -->
+    <div class="absolute top-20 left-10 w-32 h-32 border border-gold-500/20 rounded-full animate-spin-slow"></div>
+    <div class="absolute bottom-20 right-10 w-48 h-48 border border-gold-500/10 rounded-full animate-spin-slow"
+      style="animation-direction:reverse"></div>
+    <div class="absolute top-1/4 right-1/4 w-20 h-20 border border-gold-500/15 rotate-45 animate-float"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+      <!-- Bismillah -->
+      <p class="font-amiri text-gold-400 text-2xl md:text-3xl mb-6 animate-fade-in-up" style="animation-delay:0.2s">
+        بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+      </p>
+      <!-- Main Title with Gold Animation -->
+      <h2 class="text-4xl md:text-6xl lg:text-5xl font-extrabold leading-tight tracking-tight mb-4 animate-fade-in-up"
+        style="animation-delay:0.4s">
+        <span class="gold-shimmer">YAYASAN PONDOK PESANTREN</span><br>
+        <span class="gold-shimmer">MINHADLUL ULUM</span>
+      </h2>
+      <!-- Subtitle -->
+      <p class="text-cream-200/80 text-lg md:text-xl font-medium mb-2 animate-fade-in-up" style="animation-delay:0.6s">
+        Trimulyo Tegineneng Pasawaran Lampung
+      </p>
+      <!-- Tagline -->
+      <p class="font-amiri text-gold-300 text-xl md:text-2xl mt-6 mb-10 animate-fade-in-up"
+        style="animation-delay:0.8s">
+        "Membangun Generasi Berilmu, Berakhlak, dan Berprestasi"
+      </p>
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style="animation-delay:1s">
+        <a href="https://s.id/SPMBYPPMU99" target="_blank"
+          class="px-10 py-4 bg-gradient-to-r from-gold-600 to-gold-700 text-white font-bold text-lg rounded-full hover:from-gold-700 hover:to-gold-800 transition-all shadow-xl hover:shadow-2xl hover:scale-105 animate-pulse-glow">
+          Daftar Sekarang
+        </a>
+        <a href="#tentang"
+          class="px-10 py-4 border-2 border-white/30 text-white font-semibold text-lg rounded-full hover:bg-white/10 backdrop-blur-sm transition-all hover:scale-105">
+          Pelajari Lebih Lanjut
+        </a>
+      </div>
+      <!-- Stats -->
+      <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 animate-fade-in-up" style="animation-delay:1.2s">
+        <div class="text-center">
+          <p class="text-3xl md:text-4xl font-extrabold text-gold-400"><span class="counter" data-target="25">0</span>+
+          </p>
+          <p class="text-cream-200/70 text-sm mt-1">Tahun Berdiri</p>
+        </div>
+        <div class="text-center">
+          <p class="text-3xl md:text-4xl font-extrabold text-gold-400"><span class="counter"
+              data-target="1500">0</span>+</p>
+          <p class="text-cream-200/70 text-sm mt-1">Alumni</p>
+        </div>
+        <div class="text-center">
+          <p class="text-3xl md:text-4xl font-extrabold text-gold-400"><span class="counter" data-target="60">0</span>+
+          </p>
+          <p class="text-cream-200/70 text-sm mt-1">Tenaga Pendidik</p>
+        </div>
+        <div class="text-center">
+          <p class="text-3xl md:text-4xl font-extrabold text-gold-400"><span class="counter" data-target="5">0</span>
+          </p>
+          <p class="text-cream-200/70 text-sm mt-1">Jenjang Pendidikan</p>
+        </div>
+      </div>
+    </div>
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <i data-lucide="chevron-down" class="w-8 h-8 text-gold-400/60"></i>
+    </div>
+  </section>
+
+  <!-- TENTANG KAMI -->
+  <section id="tentang" class="py-24 bg-cream-50 arabesque-bg relative overflow-hidden">
+    <div
+      class="absolute top-0 left-0 w-64 h-64 bg-emerald-100/40 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2">
+    </div>
+    <div
+      class="absolute bottom-0 right-0 w-80 h-80 bg-gold-100/30 rounded-full blur-3xl translate-x-1/3 translate-y-1/3">
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <!-- Section Header -->
+      <div class="text-center mb-16 reveal">
+        <p class="font-amiri text-gold-600 text-2xl mb-2">مَنْ يُرِدِ اللَّهُ بِهِ خَيْرًا يُفَقِّهْهُ فِي الدِّينِ</p>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-emerald-900 tracking-tight">Tentang Kami</h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-emerald-600 to-gold-500 mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+        <!-- Left: History -->
+        <div class="reveal">
+          <div class="bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-emerald-100/50 relative overflow-hidden">
+            <div
+              class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-gold-100/50 to-transparent rounded-bl-full">
+            </div>
+            <div class="relative z-10">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center">
+                  <i data-lucide="landmark" class="w-6 h-6 text-emerald-700"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-emerald-900">Sejarah YPPMU</h3>
+              </div>
+              <p class="text-emerald-800/80 leading-relaxed text-lg">
+                Yayasan Pondok Pesantren Minhadlul Ulum (YPPMU) didirikan pada tahun <strong
+                  class="text-gold-700">1999</strong> oleh pendiri yang visioner, <strong class="text-gold-700">KH. M.
+                  Syaifuddin Fatoni</strong>, dengan tekad kuat untuk mencetak generasi muslim yang berilmu, berakhlak
+                mulia, dan berprestasi.
+              </p>
+              <p class="text-emerald-800/80 leading-relaxed text-lg mt-4">
+                Berlokasi di Trimulyo, Tegineneng, Pasawaran, Lampung, YPPMU telah menjadi pusat pendidikan Islam
+                terpadu yang menggabungkan kurikulum pesantren salafiyah dengan pendidikan formal modern, membentuk
+                santri yang siap menghadapi tantangan zaman.
+              </p>
+              <div class="mt-8 flex items-center gap-4">
+                <div
+                  class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-700 to-emerald-900 flex items-center justify-center">
+                  <span class="font-amiri text-gold-400 text-2xl font-bold">١٩٩٩</span>
+                </div>
+                <div>
+                  <p class="font-bold text-emerald-900">Tahun Pendirian</p>
+                  <p class="text-sm text-emerald-700">25+ tahun mendedikasikan diri untuk pendidikan</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: SPMB Video + Campus Photo -->
+        <div class="space-y-6 reveal" style="transition-delay:0.2s">
+          <!-- SPMB Video -->
+          <div class="bg-white rounded-3xl overflow-hidden shadow-xl border border-emerald-100/50">
+            <div class="p-4 pb-2">
+              <p class="text-sm font-semibold text-emerald-700 flex items-center gap-2">
+                <i data-lucide="play-circle" class="w-4 h-4 text-gold-600"></i>
+                Video singkat YPPMU
+              </p>
+            </div>
+            <div class="relative aspect-video bg-emerald-900 mx-4 mb-4 rounded-2xl overflow-hidden group">
+              <a href="https://youtu.be/apAcWcbwUCM?si=TfBg87XMgPsw7-go" target="_blank"
+                class="block w-full h-full relative">
+                <img src="images/profil.jpg" alt="Profil YPPMU"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div
+                    class="w-16 h-16 bg-emerald-900/40 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-white/30">
+                    <i data-lucide="play" class="w-8 h-8 text-white fill-current ml-1"></i>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+          <!-- Campus Photo -->
+          <div class="relative rounded-3xl overflow-hidden shadow-xl group">
+            <img src="images/rusun.jpg" alt="Kampus YPPMU"
+              class="w-full h-64 object-cover warm-filter group-hover:scale-105 transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-emerald-900/70 via-transparent to-transparent"></div>
+            <div class="absolute bottom-6 left-6">
+              <p class="text-white font-bold text-xl">Asrama YPPMU</p>
+              <p class="text-cream-200/80 text-sm">Trimulyo, Tegineneng, Pasawaran</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visi & Misi -->
+      <div class="grid md:grid-cols-2 gap-8 reveal" style="transition-delay:0.3s">
+        <!-- Visi -->
+        <div
+          class="bg-white rounded-3xl p-8 shadow-xl border border-emerald-100/50 relative overflow-hidden group hover:shadow-2xl transition-shadow duration-500">
+          <div
+            class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-emerald-50 to-transparent rounded-bl-full">
+          </div>
+          <div class="absolute -bottom-4 -right-4 w-24 h-24 border-2 border-gold-200/30 rounded-full"></div>
+          <div class="relative z-10">
+            <div
+              class="w-16 h-16 bg-gradient-to-br from-emerald-600 to-emerald-800 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <i data-lucide="eye" class="w-8 h-8 text-white"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-emerald-900 mb-4">Visi</h3>
+            <p class="text-emerald-800/80 leading-relaxed text-lg">
+              <li class="flex gap-3"><span class="text-gold-500 mt-1">✦</span>“Menciptakan Manusia Yang Bertaqwa,
+                Berilmu Dan Berakhlakul karimah”.</li>
+            </p>
+          </div>
+        </div>
+        <!-- Misi -->
+        <div
+          class="bg-white rounded-3xl p-8 shadow-xl border border-emerald-100/50 relative overflow-hidden group hover:shadow-2xl transition-shadow duration-500">
+          <div class="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-gold-50 to-transparent rounded-bl-full">
+          </div>
+          <div class="absolute -bottom-4 -right-4 w-24 h-24 border-2 border-emerald-200/30 rounded-full"></div>
+          <div class="relative z-10">
+            <div
+              class="w-16 h-16 bg-gradient-to-br from-gold-500 to-gold-700 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+              <i data-lucide="target" class="w-8 h-8 text-white"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-emerald-900 mb-4">Misi</h3>
+            <ul class="space-y-3 text-emerald-800/80 text-lg">
+              <li class="flex gap-3"><span class="text-gold-500 mt-1">✦</span>Mewujudkan manusia yang berilmu dengan
+                mengembangkan kreatiﬁtas dan kompetisi di segala bidang.</li>
+              <li class="flex gap-3"><span class="text-gold-500 mt-1">✦</span>Mewujudkan manusia yang berakhlakul
+                karimah dengan mengamalkan perilaku yang baik.</li>
+              <li class="flex gap-3"><span class="text-gold-500 mt-1">✦</span>Mewujudkan pembelajaran dan bimbingan
+                secara efektif, sehingga setiap santri/siswa berkembang secara oktimal sesuai dengan potensi yang di
+                miliki</li>
+              <li class="flex gap-3"><span class="text-gold-500 mt-1">✦</span>Menciptakan lingkungan Islami yang
+                kondusif.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAM PENDIDIKAN -->
+  <section id="program"
+    class="py-24 bg-gradient-to-b from-emerald-900 via-emerald-950 to-emerald-900 relative overflow-hidden">
+    <div class="absolute inset-0 arabesque-dark"></div>
+    <div class="absolute top-20 right-20 w-40 h-40 border border-gold-500/10 rounded-full animate-float"></div>
+    <div class="absolute bottom-20 left-10 w-32 h-32 border border-gold-500/10 rotate-45 animate-float-delay"></div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="text-center mb-16 reveal">
+        <p class="font-amiri text-gold-400 text-2xl mb-2">وَقُلْ رَبِّ زِدْنِي عِلْمًا</p>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight">Program Pendidikan</h2>
+        <p class="text-emerald-200/70 mt-4 text-lg max-w-2xl mx-auto">Kurikulum terpadu yang menggabungkan keunggulan
+          pendidikan pesantren salafiyah dengan pendidikan formal berkualitas</p>
+        <div class="w-24 h-1 bg-gradient-to-r from-gold-400 to-gold-600 mx-auto mt-6 rounded-full"></div>
+      </div>
+
+      <!-- Kurikulum Info -->
+      <div class="reveal mb-12">
+        <div
+          class="bg-emerald-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gold-500/20 flex flex-col md:flex-row items-center gap-6">
+          <div class="w-14 h-14 bg-gold-500/20 rounded-xl flex items-center justify-center shrink-0">
+            <i data-lucide="book-open" class="w-7 h-7 text-gold-400"></i>
+          </div>
+          <div>
+            <h3 class="text-white font-bold text-xl">Kurikulum Terpadu</h3>
+            <p class="text-emerald-200/70 mt-1">Mengintegrasikan Kurikulum Merdeka (Kemendikbud) dengan Kurikulum
+              Pesantren (Kitab Kuning, Tahfidz, Bahasa Arab) untuk membentuk generasi yang berilmu dan berakhlak.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Programs Grid -->
+      <div class="grid md:grid-cols-3 lg:grid-cols-5 gap-6 mb-12">
+        <!-- PAUD -->
+        <div
+          class="reveal group bg-gradient-to-b from-emerald-800/60 to-emerald-900/60 backdrop-blur-sm rounded-3xl p-6 border border-gold-500/10 hover:border-gold-500/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl text-center">
+          <div
+            class="w-16 h-16 mx-auto bg-gradient-to-br from-pink-400 to-pink-600 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <i data-lucide="baby" class="w-8 h-8 text-white"></i>
+          </div>
+          <h3 class="text-white font-bold text-xl mb-2">PAUD</h3>
+          <p class="text-emerald-200/60 text-sm">Pendidikan Anak Usia Dini</p>
+          <div class="mt-4 text-gold-400 font-amiri text-lg">٤ - ٦ tahun</div>
+        </div>
+        <!-- MI -->
+        <div
+          class="reveal group bg-gradient-to-b from-emerald-800/60 to-emerald-900/60 backdrop-blur-sm rounded-3xl p-6 border border-gold-500/10 hover:border-gold-500/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl text-center"
+          style="transition-delay:0.1s">
+          <div
+            class="w-16 h-16 mx-auto bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <i data-lucide="book-open" class="w-8 h-8 text-white"></i>
+          </div>
+          <h3 class="text-white font-bold text-xl mb-2">MI</h3>
+          <p class="text-emerald-200/60 text-sm">Madrasah Ibtidaiyah</p>
+          <div class="mt-4 text-gold-400 font-amiri text-lg">Kelas ١ - ٦</div>
+        </div>
+        <!-- MTs -->
+        <div
+          class="reveal group bg-gradient-to-b from-emerald-800/60 to-emerald-900/60 backdrop-blur-sm rounded-3xl p-6 border border-gold-500/10 hover:border-gold-500/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl text-center"
+          style="transition-delay:0.2s">
+          <div
+            class="w-16 h-16 mx-auto bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <i data-lucide="globe" class="w-8 h-8 text-white"></i>
+          </div>
+          <h3 class="text-white font-bold text-xl mb-2">MTs</h3>
+          <p class="text-emerald-200/60 text-sm">Madrasah Tsanawiyah</p>
+          <div class="mt-4 text-gold-400 font-amiri text-lg">Kelas ٧ - ٩</div>
+        </div>
+        <!-- MA -->
+        <div
+          class="reveal group bg-gradient-to-b from-emerald-800/60 to-emerald-900/60 backdrop-blur-sm rounded-3xl p-6 border border-gold-500/10 hover:border-gold-500/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl text-center"
+          style="transition-delay:0.3s">
+          <div
+            class="w-16 h-16 mx-auto bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <i data-lucide="graduation-cap" class="w-8 h-8 text-white"></i>
+          </div>
+          <h3 class="text-white font-bold text-xl mb-2">MA</h3>
+          <p class="text-emerald-200/60 text-sm">Madrasah Aliyah</p>
+          <div class="mt-4 text-gold-400 font-amiri text-lg">Kelas ١٠ - ١٢</div>
+        </div>
+        <!-- SMK -->
+        <div
+          class="reveal group bg-gradient-to-b from-gold-600/20 to-gold-700/20 backdrop-blur-sm rounded-3xl p-6 border border-gold-500/30 hover:border-gold-400/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl text-center"
+          style="transition-delay:0.4s">
+          <div
+            class="w-16 h-16 mx-auto bg-gradient-to-br from-gold-400 to-gold-600 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <i data-lucide="monitor" class="w-8 h-8 text-white"></i>
+          </div>
+          <h3 class="text-white font-bold text-xl mb-2">SMK</h3>
+          <p class="text-emerald-200/60 text-sm">Sekolah Menengah Kejuruan</p>
+          <div class="mt-4 text-gold-400 font-amiri text-lg">٣ Jurusan</div>
+        </div>
+      </div>
+
+      <!-- SMK Detail Cards -->
+      <div class="reveal">
+        <h3 class="text-center text-white font-bold text-2xl mb-8">
+          <span class="text-gold-400">SMK</span> — Kompetensi Keahlian
+        </h3>
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- AKL -->
+          <div
+            class="group bg-gradient-to-br from-emerald-800/40 to-emerald-900/40 rounded-3xl overflow-hidden border border-gold-500/10 hover:border-gold-400/30 transition-all duration-500 hover:shadow-2xl">
+            <div class="h-3 bg-gradient-to-r from-blue-400 to-blue-600"></div>
+            <div class="p-8">
+              <div
+                class="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                <i data-lucide="calculator" class="w-8 h-8 text-blue-400"></i>
+              </div>
+              <h4 class="text-white font-bold text-xl mb-3">AKL</h4>
+              <p class="text-emerald-200/60 text-sm mb-4">Akuntansi & Keuangan Lembaga</p>
+              <ul class="space-y-2 text-emerald-200/70 text-sm">
+                <li class="flex items-center gap-2"><i data-lucide="check-circle"
+                    class="w-4 h-4 text-gold-400"></i>Akuntansi Dasar</li>
+                <li class="flex items-center gap-2"><i data-lucide="check-circle"
+                    class="w-4 h-4 text-gold-400"></i>Perbankan Syariah</li>
+                <li class="flex items-center gap-2"><i data-lucide="check-circle"
+                    class="w-4 h-4 text-gold-400"></i>Perpajakan</li>
+                <li class="flex items-center gap-2"><i data-lucide="check-circle"
+                    class="w-4 h-4 text-gold-400"></i>Administrasi Keuangan</li>
+              </ul>
+            </div>
+          </div>
+          <!-- TKJ -->
+          <div
+            class="group bg-gradient-to-br from-emerald-800/40 to-emerald-900/40 rounded-3xl overflow-hidden border border-gold-500/10 hover:border-gold-400/30 transition-all duration-500 hover:shadow-2xl">
+            <div class="h-3 bg-gradient-to-r from-emerald-400 to-emerald-600"></div>
+            <div class="p-8">
+              <div
+                class="w-16 h-16 bg-emerald-500/20 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                <i data-lucide="wifi" class="w-8 h-8 text-emerald-400"></i>
+              </div>
+              <h4 class="text-white font-bold text-xl mb-3">TKJ</h4>
+              <p class="text-emerald-200/60 text-sm mb-4">Teknik Komputer & Jaringan</p>
+              <ul class="space-y-2 text-emerald-200/70 text-sm">
+                <li class="flex items-center gap-2"><i data-lucide="check-circle"
+                    class="w-4 h-4 text-gold-400"></i>Jaringan Komputer</li>
+                <li class="flex items-center gap-2"><i data-lucide="check-circle"
+                    class="w-4 h-4 text-gold-400"></i>Administrasi Server</li>
+                <li class="flex items-center gap-2"><i data-lucide="check-circle"
+                    class="w-4 h-4 text-gold-400"></i>Cyber Security</li>
+                <li class="flex items-center gap-2"><i data-lucide="check-circle"
+                    class="w-4 h-4 text-gold-400"></i>Teknologi Layanan Jaringan</li>
+              </ul>
+            </div>
+          </div>
+          <!-- TBSM -->
+          <div
+            class="group bg-gradient-to-br from-emerald-800/40 to-emerald-900/40 rounded-3xl overflow-hidden border border-gold-500/10 hover:border-gold-400/30 transition-all duration-500 hover:shadow-2xl">
+            <div class="h-3 bg-gradient-to-r from-orange-400 to-orange-600"></div>
+            <div class="p-8">
+              <div
+                class="w-16 h-16 bg-orange-500/20 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+                <i data-lucide="wrench" class="w-8 h-8 text-orange-400"></i>
+              </div>
+              <h4 class="text-white font-bold text-xl mb-3">TBSM</h4>
+              <p class="text-emerald-200/60 text-sm mb-4">Teknik & Bisnis Sepeda Motor</p>
+              <ul class="space-y-2 text-emerald-200/70 text-sm">
+                <li class="flex items-center gap-2"><i data-lucide="check-circle"
+                    class="w-4 h-4 text-gold-400"></i>Perawatan Motor</li>
+                <li class="flex items-center gap-2"><i data-lucide="check-circle"
+                    class="w-4 h-4 text-gold-400"></i>Perbaikan Engine</li>
+                <li class="flex items-center gap-2"><i data-lucide="check-circle"
+                    class="w-4 h-4 text-gold-400"></i>Chasis & Pemindah Tenaga</li>
+                <li class="flex items-center gap-2"><i data-lucide="check-circle"
+                    class="w-4 h-4 text-gold-400"></i>Kewirausahaan</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FASILITAS -->
+  <section id="fasilitas" class="py-24 bg-cream-50 arabesque-bg relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-96 h-96 bg-emerald-100/30 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-gold-100/20 rounded-full blur-3xl"></div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="text-center mb-16 reveal">
+        <p class="font-amiri text-gold-600 text-2xl mb-2">إِنَّ هَذَا الْمَسْجِدَ مُبَارَكٌ</p>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-emerald-900 tracking-tight">Fasilitas Sekolah</h2>
+        <p class="text-emerald-700/70 mt-4 text-lg max-w-2xl mx-auto">Sarana dan prasarana modern untuk menunjang proses
+          belajar mengajar yang optimal</p>
+        <div class="w-24 h-1 bg-gradient-to-r from-emerald-600 to-gold-500 mx-auto mt-6 rounded-full"></div>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <!-- Masjid -->
+        <div
+          class="reveal group relative rounded-3xl overflow-hidden shadow-xl cursor-pointer lg:col-span-2 lg:row-span-2"
+          onclick="openLightbox(0)">
+          <img src="images/masjid.jpg" alt="Masjid"
+            class="w-full h-full min-h-[300px] lg:min-h-[500px] object-cover warm-filter group-hover:scale-110 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-emerald-900/80 via-emerald-900/20 to-transparent"></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-10 h-10 bg-gold-500/20 rounded-lg flex items-center justify-center backdrop-blur-sm">
+                <i data-lucide="moon" class="w-5 h-5 text-gold-400"></i>
+              </div>
+              <h3 class="text-white font-bold text-2xl">Masjid Al-Mukarram</h3>
+            </div>
+            <p class="text-cream-200/70 text-sm">Tempat ibadah dan pembinaan spiritual santri</p>
+          </div>
+          <div
+            class="absolute top-4 right-4 w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <i data-lucide="expand" class="w-5 h-5 text-white"></i>
+          </div>
+        </div>
+        <!-- Perpustakaan -->
+        <div class="reveal group relative rounded-3xl overflow-hidden shadow-xl cursor-pointer"
+          onclick="openLightbox(1)" style="transition-delay:0.1s">
+          <img src="images/lapangan.jpg" alt="Perpustakaan"
+            class="w-full h-64 object-cover warm-filter group-hover:scale-110 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-emerald-900/80 to-transparent"></div>
+          <div class="absolute bottom-4 left-4">
+            <div class="flex items-center gap-2">
+              <i data-lucide="book-open" class="w-4 h-4 text-gold-400"></i>
+              <h3 class="text-white font-bold">Lapangan Olahraga</h3>
+            </div>
+          </div>
+        </div>
+        <!-- Lab -->
+        <div class="reveal group relative rounded-3xl overflow-hidden shadow-xl cursor-pointer"
+          onclick="openLightbox(2)" style="transition-delay:0.2s">
+          <img src="images/kantor ma.jpg" alt="Laboratorium"
+            class="w-full h-64 object-cover warm-filter group-hover:scale-110 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-emerald-900/80 to-transparent"></div>
+          <div class="absolute bottom-4 left-4">
+            <div class="flex items-center gap-2">
+              <i data-lucide="monitor" class="w-4 h-4 text-gold-400"></i>
+              <h3 class="text-white font-bold">Kantor Ma</h3>
+            </div>
+          </div>
+        </div>
+        <!-- Ruang Kelas -->
+        <div class="reveal group relative rounded-3xl overflow-hidden shadow-xl cursor-pointer"
+          onclick="openLightbox(3)" style="transition-delay:0.3s">
+          <img src="images/lab komputer.jpeg" alt="Ruang Kelas"
+            class="w-full h-64 object-cover warm-filter group-hover:scale-110 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-emerald-900/80 to-transparent"></div>
+          <div class="absolute bottom-4 left-4">
+            <div class="flex items-center gap-2">
+              <i data-lucide="school" class="w-4 h-4 text-gold-400"></i>
+              <h3 class="text-white font-bold">Lab Komputer</h3>
+            </div>
+          </div>
+        </div>
+        <!-- Aula -->
+        <div class="reveal group relative rounded-3xl overflow-hidden shadow-xl cursor-pointer"
+          onclick="openLightbox(4)" style="transition-delay:0.4s">
+          <img src="images/bengkel.jpg" alt="Aula"
+            class="w-full h-64 object-cover warm-filter group-hover:scale-110 transition-transform duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-emerald-900/80 to-transparent"></div>
+          <div class="absolute bottom-4 left-4">
+            <div class="flex items-center gap-2">
+              <i data-lucide="building" class="w-4 h-4 text-gold-400"></i>
+              <h3 class="text-white font-bold">Benkel TBSM</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Video Fasilitas -->
+      <div class="reveal">
+        <div class="bg-white rounded-3xl overflow-hidden shadow-xl border border-emerald-100/50">
+          <div class="p-6 pb-4 flex items-center justify-between">
+            <p class="font-bold text-emerald-900 text-xl flex items-center gap-3">
+              <i data-lucide="video" class="w-6 h-6 text-gold-600"></i>
+              FILM PENDEK SPMB YPPMU
+            </p>
+            <span class="text-sm text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">Virtual Tour</span>
+          </div>
+          <div class="relative aspect-video bg-emerald-900 mx-6 mb-6 rounded-2xl overflow-hidden group">
+            <a href="https://www.tiktok.com/@galerippmu/video/7588949940915801365?is_from_webapp=1&sender_device=pc&web_id=7611928728607786516"
+              target="_blank" class="block w-full h-full relative">
+              <img src="images/cover spmb.jpg" alt="SPMB Cover"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div
+                  class="w-20 h-20 bg-emerald-900/40 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-white/30">
+                  <i data-lucide="play" class="w-10 h-10 text-white fill-current ml-1"></i>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!DOCTYPE html>
+  <html lang="id">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title>
+
+    <!-- Google Fonts - Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+      /* ===== RESET & BASE STYLES ===== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --color-white: #ffffff;
+        --color-black: #1a1a1a;
+        --color-gray-light: #a8c0a8;
+        --color-gray-medium: #e0e0e0;
+        --color-gray-dark: #757575;
+        --color-accent: #333333;
+        --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.08);
+        --shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.15);
+        --shadow-heavy: 0 15px 50px rgba(0, 0, 0, 0.25);
+        --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      body {
+        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background-color: var(--color-gray-light);
+        color: var(--color-black);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* ===== HEADER & NAVIGATION ===== */
+      header {
+        background-color: var(--color-white);
+        box-shadow: var(--shadow-light);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 0 2rem;
+      }
+
+      .header-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.2rem 0;
+      }
+
+      .logo h1 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        background: linear-gradient(135deg, var(--color-black), var(--color-gray-dark));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2.5rem;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: var(--color-gray-dark);
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: var(--transition-smooth);
+        position: relative;
+        padding: 0.5rem 0;
+      }
+
+      nav a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--color-black);
+        transition: width 0.3s ease;
+      }
+
+      nav a:hover {
+        color: var(--color-black);
+      }
+
+      nav a:hover::after,
+      nav a.active::after {
+        width: 100%;
+      }
+
+      nav a.active {
+        color: var(--color-black);
+      }
+
+      /* Mobile Menu Toggle */
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+        padding: 5px;
+      }
+
+      .menu-toggle span {
+        width: 25px;
+        height: 2px;
+        background-color: var(--color-black);
+        transition: var(--transition-smooth);
+      }
+
+      /* ===== MAIN CONTENT ===== */
+      main {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+      }
+
+      .gallery-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .gallery-header h2 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin-bottom: 0.8rem;
+        color: var(--color-black);
+      }
+
+      .gallery-header p {
+        color: var(--color-gray-dark);
+        font-size: 1.05rem;
+        font-weight: 300;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* ===== GALLERY GRID ===== */
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.8rem;
+      }
+
+      /* ===== PHOTO CARD ===== */
+      .photo-card {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: var(--color-white);
+        box-shadow: var(--shadow-light);
+        cursor: pointer;
+        transition: var(--transition-smooth);
+        aspect-ratio: 4 / 3;
+      }
+
+      .photo-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-medium);
+      }
+
+      .photo-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .photo-card:hover img {
+        transform: scale(1.08);
+      }
+
+      .photo-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1.5rem;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: var(--transition-smooth);
+      }
+
+      .photo-card:hover .photo-overlay {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .photo-overlay h3 {
+        color: var(--color-white);
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+      }
+
+      .photo-overlay p {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 0.9rem;
+        font-weight: 300;
+      }
+
+      .photo-icon {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: scale(0.8);
+        transition: var(--transition-smooth);
+        color: var(--color-black);
+        font-size: 1rem;
+      }
+
+      .photo-card:hover .photo-icon {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* ===== LIGHTBOX ===== */
+      .lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .lightbox.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      .lightbox-content {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        animation: lightboxZoomIn 0.4s ease;
+      }
+
+      @keyframes lightboxZoomIn {
+        from {
+          transform: scale(0.9);
+          opacity: 0;
+        }
+
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .lightbox-content img {
+        max-width: 100%;
+        max-height: 90vh;
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: var(--shadow-heavy);
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: -45px;
+        right: 0;
+        background: transparent;
+        border: none;
+        color: var(--color-white);
+        font-size: 2rem;
+        cursor: pointer;
+        transition: var(--transition-smooth);
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .lightbox-close:hover {
+        color: var(--color-gray-medium);
+        transform: rotate(90deg);
+      }
+
+      .lightbox-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.15);
+        border: none;
+        color: var(--color-white);
+        font-size: 1.5rem;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition-smooth);
+        backdrop-filter: blur(10px);
+      }
+
+      .lightbox-nav:hover {
+        background-color: rgba(255, 255, 255, 0.25);
+      }
+
+      .lightbox-prev {
+        left: -70px;
+      }
+
+      .lightbox-next {
+        right: -70px;
+      }
+
+      .lightbox-info {
+        text-align: center;
+        margin-top: 1rem;
+        color: var(--color-white);
+      }
+
+      .lightbox-info h3 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+      }
+
+      .lightbox-info p {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 300;
+      }
+
+      /* ===== FOOTER ===== */
+      footer {
+        background-color: var(--color-white);
+        border-top: 1px solid var(--color-gray-medium);
+        padding: 2.5rem 2rem;
+        margin-top: 4rem;
+      }
+
+      .footer-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .footer-container p {
+        color: var(--color-gray-dark);
+        font-size: 0.9rem;
+        font-weight: 400;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1rem;
+      }
+
+      .social-links a {
+        color: var(--color-gray-dark);
+        font-size: 1.2rem;
+        transition: var(--transition-smooth);
+      }
+
+      .social-links a:hover {
+        color: var(--color-black);
+        transform: translateY(-3px);
+      }
+
+      /* ===== RESPONSIVE DESIGN ===== */
+
+      /* Tablet (max-width: 1024px) */
+      @media (max-width: 1024px) {
+        .gallery-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.5rem;
+        }
+
+        .gallery-header h2 {
+          font-size: 2rem;
+        }
+      }
+
+      /* Mobile (max-width: 768px) */
+      @media (max-width: 768px) {
+        header {
+          padding: 0 1.5rem;
+        }
+
+        .menu-toggle {
+          display: flex;
+        }
+
+        nav {
+          position: fixed;
+          top: 70px;
+          left: 0;
+          right: 0;
+          background-color: var(--color-white);
+          box-shadow: var(--shadow-medium);
+          padding: 1.5rem;
+          transform: translateY(-150%);
+          opacity: 0;
+          transition: var(--transition-smooth);
+        }
+
+        nav.active {
+          transform: translateY(0);
+          opacity: 1;
+        }
+
+        nav ul {
+          flex-direction: column;
+          gap: 1.2rem;
+        }
+
+        nav a {
+          font-size: 1.1rem;
+          display: block;
+          padding: 0.5rem 0;
+        }
+
+        main {
+          padding: 2rem 1.5rem;
+        }
+
+        .gallery-grid {
+          grid-template-columns: 1fr;
+          gap: 1.2rem;
+        }
+
+        .gallery-header h2 {
+          font-size: 1.8rem;
+        }
+
+        .logo h1 {
+          font-size: 1.5rem;
+        }
+
+        .lightbox-nav {
+          width: 40px;
+          height: 40px;
+          font-size: 1.2rem;
+        }
+
+        .lightbox-prev {
+          left: 10px;
+        }
+
+        .lightbox-next {
+          right: 10px;
+        }
+      }
+
+      /* Small Mobile (max-width: 480px) */
+      @media (max-width: 480px) {
+        .header-container {
+          padding: 1rem 0;
+        }
+
+        .gallery-header {
+          margin-bottom: 2rem;
+        }
+
+        .gallery-header h2 {
+          font-size: 1.6rem;
+        }
+
+        .gallery-header p {
+          font-size: 0.95rem;
+        }
+
+        .photo-overlay {
+          opacity: 1;
+          transform: translateY(0);
+          padding: 1rem;
+        }
+
+        .photo-overlay h3 {
+          font-size: 1rem;
+        }
+
+        .photo-overlay p {
+          font-size: 0.85rem;
+        }
+
+        .photo-icon {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* ===== LOADING ANIMATION ===== */
+      .photo-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg,
+            var(--color-gray-light) 0%,
+            var(--color-white) 50%,
+            var(--color-gray-light) 100%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        z-index: 1;
+      }
+
+      .photo-card.loaded::before {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      @keyframes shimmer {
+        0% {
+          background-position: 200% 0;
+        }
+
+        100% {
+          background-position: -200% 0;
+        }
+      }
+
+      /* ===== SCROLL TO TOP BUTTON ===== */
+      .scroll-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 50px;
+        height: 50px;
+        background-color: var(--color-black);
+        color: var(--color-white);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition-smooth);
+        box-shadow: var(--shadow-medium);
+        z-index: 999;
+      }
+
+      .scroll-top.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .scroll-top:hover {
+        background-color: var(--color-accent);
+        transform: translateY(-5px);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- MAIN CONTENT -->
+    <main>
+      <section class="gallery-header" id="gallery">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-4">
+          <span class="gold-shimmer">GALERI YPPMU</span>
+        </h1>
+        <p>"Pendidikan adalah kunci kesuksesan dalam hidup, dan guru memberi pengaruh abadi pada kehidupan muridnya"</p>
+      </section>
+
+      <div class="gallery-grid">
+        <!-- Photo Card 1 -->
+        <div class="photo-card" onclick="openLightbox(9)">
+          <img src="images/abh.jpg" alt="Mountain Landscape" onload="this.parentElement.classList.add('loaded')">
+          <div class="photo-icon"><i class="fas fa-expand"></i></div>
+          <div class="photo-overlay">
+            <h3>KH.M. SAIFUDDIN FATHONI</h3>
+            <p>Pendiri Pon-Pes Minhadlul’ulum</p>
+          </div>
+        </div>
+
+        <!-- Photo Card 2 -->
+        <div class="photo-card" onclick="openLightbox(10)">
+          <img src="images/ibu.jpg" alt="Forest Path" onload="this.parentElement.classList.add('loaded')">
+          <div class="photo-icon"><i class="fas fa-expand"></i></div>
+          <div class="photo-overlay">
+            <h3>Nyai hj. Maryam Maulida, S.Pd.I</h3>
+            <p>Ummul Ma’had</p>
+          </div>
+        </div>
+
+        <!-- Photo Card 3 -->
+        <div class="photo-card" onclick="openLightbox(11)">
+          <img src="images/gus a.jpg" alt="Misty Mountains" onload="this.parentElement.classList.add('loaded')">
+          <div class="photo-icon"><i class="fas fa-expand"></i></div>
+          <div class="photo-overlay">
+            <h3>Dr. H. Amin Udin el-Hady, S.H.I., M.Pd.I</h3>
+            <p>pengasuh Pon-Pes Minhadlul’ulum</p>
+          </div>
+        </div>
+
+        <!-- Photo Card 4 -->
+        <div class="photo-card" onclick="openLightbox(12)">
+          <img src="images/gusrohim.jpg" alt="Sunset Valley" onload="this.parentElement.classList.add('loaded')">
+          <div class="photo-icon"><i class="fas fa-expand"></i></div>
+          <div class="photo-overlay">
+            <h3>Gus. Nur Rohim</h3>
+            <p>Rois Madrasah Diniyah Takmiliyyah</p>
+          </div>
+        </div>
+
+        <!-- Photo Card 5 -->
+        <div class="photo-card" onclick="openLightbox(13)">
+          <img src="images/keluarga.jpg" alt=" Lake Reflection" onload="this.parentElement.classList.add('loaded')">
+          <div class="photo-icon"><i class="fas fa-expand"></i></div>
+          <div class="photo-overlay">
+            <h3>dzuriyah Ndalem</h3>
+            <p>PP.Minhadlul Ulum</p>
+          </div>
+        </div>
+
+        <!-- Photo Card 6 -->
+        <div class="photo-card" onclick="openLightbox(14)">
+          <img src="images/Kepala Sekolah.jpg" alt="Green Hills" onload="this.parentElement.classList.add('loaded')">
+          <div class="photo-icon"><i class="fas fa-expand"></i></div>
+          <div class="photo-overlay">
+            <h3>Kepala Sekolah YPPMU</h3>
+            <p>dan tenaga pendidik</p>
+          </div>
+        </div>
+
+        <!-- Photo Card 7 -->
+        <div class="photo-card" onclick="openLightbox(15)">
+          <img src="images/putra.jpg" alt="Waterfall" onload="this.parentElement.classList.add('loaded')">
+          <div class="photo-icon"><i class="fas fa-expand"></i></div>
+          <div class="photo-overlay">
+            <h3>Pengurus Putra</h3>
+            <p>Madrasah Diniyah Takmiliyyah</p>
+          </div>
+        </div>
+
+        <!-- Photo Card 8 -->
+        <div class="photo-card" onclick="openLightbox(16)">
+          <img src="images/putri.jpg" alt="Alpine Lake" onload="this.parentElement.classList.add('loaded')">
+          <div class="photo-icon"><i class="fas fa-expand"></i></div>
+          <div class="photo-overlay">
+            <h3>Pengurus Putri</h3>
+            <p>Madrasah Diniyah Takmiliyyah</p>
+          </div>
+        </div>
+
+        <!-- Photo Card 9 -->
+        <div class="photo-card" onclick="openLightbox(17)">
+          <img src="images/ust.jpg" alt="Snowy Peaks" onload="this.parentElement.classList.add('loaded')">
+          <div class="photo-icon"><i class="fas fa-expand"></i></div>
+          <div class="photo-overlay">
+            <h3>sebagian asatidz PPMU</h3>
+            <p>Pembukaan Ngaji Diniyah</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+      <button
+        class="absolute top-6 right-6 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/20 transition-colors z-10">
+        <i data-lucide="x" class="w-6 h-6 text-white"></i>
+      </button>
+      <button id="prevBtn"
+        class="absolute left-4 md:left-8 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/20 transition-colors z-10"
+        onclick="event.stopPropagation();navigateLightbox(-1)">
+        <i data-lucide="chevron-left" class="w-6 h-6 text-white"></i>
+      </button>
+      <button id="nextBtn"
+        class="absolute right-4 md:right-8 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/20 transition-colors z-10"
+        onclick="event.stopPropagation();navigateLightbox(1)">
+        <i data-lucide="chevron-right" class="w-6 h-6 text-white"></i>
+      </button>
+      <img id="lightboxImg"
+        class="max-w-[90vw] max-h-[85vh] object-contain rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"
+        onclick="event.stopPropagation()">
+    </div>
+
+    <!-- KEGIATAN & PRESTASI -->
+    <section id="kegiatan" class="py-24 bg-gradient-to-b from-cream-100 to-cream-50 relative overflow-hidden">
+      <div class="absolute inset-0 arabesque-bg opacity-50"></div>
+
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16 reveal">
+          <p class="font-amiri text-gold-600 text-2xl mb-2">وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَى</p>
+          <h2 class="text-4xl md:text-5xl font-extrabold text-emerald-900 tracking-tight">Kegiatan & Prestasi</h2>
+          <p class="text-emerald-700/70 mt-4 text-lg max-w-2xl mx-auto">Perjalanan dan pencapaian YPPMU dalam membangun
+            generasi unggul</p>
+          <div class="w-24 h-1 bg-gradient-to-r from-emerald-600 to-gold-500 mx-auto mt-6 rounded-full"></div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="relative max-w-4xl mx-auto mb-20">
+          <div class="timeline-line hidden md:block"></div>
+
+          <!-- 1999 -->
+          <div class="reveal relative flex flex-col md:flex-row items-center mb-12">
+            <div class="md:w-1/2 md:pr-12 md:text-right mb-4 md:mb-0">
+              <div class="bg-white rounded-2xl p-6 shadow-lg border border-emerald-100/50 inline-block">
+                <div class="flex items-center gap-3 md:justify-end mb-3">
+                  <span class="text-gold-600 font-bold text-lg">1999</span>
+                  <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
+                    <i data-lucide="home" class="w-5 h-5 text-emerald-700"></i>
+                  </div>
+                </div>
+                <h3 class="font-bold text-emerald-900 text-lg">Pendirian YPPMU</h3>
+                <p class="text-emerald-700/70 text-sm mt-1">KH. M. Syaifuddin Fatoni mendirikan pesantren dengan 30
+                  santri pertama</p>
+              </div>
+            </div>
+            <div
+              class="hidden md:flex w-12 h-12 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full items-center justify-center z-10 shadow-lg shrink-0">
+              <i data-lucide="star" class="w-5 h-5 text-white"></i>
+            </div>
+            <div class="md:w-1/2 md:pl-12"></div>
+          </div>
+
+          <!-- 2005 -->
+          <div class="reveal relative flex flex-col md:flex-row items-center mb-12" style="transition-delay:0.1s">
+            <div class="md:w-1/2 md:pr-12"></div>
+            <div
+              class="hidden md:flex w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-full items-center justify-center z-10 shadow-lg shrink-0">
+              <i data-lucide="moon" class="w-5 h-5 text-white"></i>
+            </div>
+            <div class="md:w-1/2 md:pl-12">
+              <div class="bg-white rounded-2xl p-6 shadow-lg border border-emerald-100/50 inline-block">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-10 h-10 bg-gold-100 rounded-lg flex items-center justify-center">
+                    <i data-lucide="moon" class="w-5 h-5 text-gold-600"></i>
+                  </div>
+                  <span class="text-gold-600 font-bold text-lg">2005</span>
+                </div>
+                <h3 class="font-bold text-emerald-900 text-lg">Pembangunan Masjid</h3>
+                <p class="text-emerald-700/70 text-sm mt-1">Inaugurasi Masjid Al-Mukarram sebagai pusat kegiatan
+                  spiritual</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2010 -->
+          <div class="reveal relative flex flex-col md:flex-row items-center mb-12" style="transition-delay:0.2s">
+            <div class="md:w-1/2 md:pr-12 md:text-right mb-4 md:mb-0">
+              <div class="bg-white rounded-2xl p-6 shadow-lg border border-emerald-100/50 inline-block">
+                <div class="flex items-center gap-3 md:justify-end mb-3">
+                  <span class="text-gold-600 font-bold text-lg">2010</span>
+                  <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <i data-lucide="monitor" class="w-5 h-5 text-blue-600"></i>
+                  </div>
+                </div>
+                <h3 class="font-bold text-emerald-900 text-lg">Pembukaan SMK</h3>
+                <p class="text-emerald-700/70 text-sm mt-1">Membuka jenjang SMK dengan jurusan AKL, TKJ, dan TBSM</p>
+              </div>
+            </div>
+            <div
+              class="hidden md:flex w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full items-center justify-center z-10 shadow-lg shrink-0">
+              <i data-lucide="monitor" class="w-5 h-5 text-white"></i>
+            </div>
+            <div class="md:w-1/2 md:pl-12"></div>
+          </div>
+
+          <!-- 2018 -->
+          <div class="reveal relative flex flex-col md:flex-row items-center mb-12" style="transition-delay:0.3s">
+            <div class="md:w-1/2 md:pr-12"></div>
+            <div
+              class="hidden md:flex w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full items-center justify-center z-10 shadow-lg shrink-0">
+              <i data-lucide="trophy" class="w-5 h-5 text-white"></i>
+            </div>
+            <div class="md:w-1/2 md:pl-12">
+              <div class="bg-white rounded-2xl p-6 shadow-lg border border-emerald-100/50 inline-block">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <i data-lucide="trophy" class="w-5 h-5 text-purple-600"></i>
+                  </div>
+                  <span class="text-gold-600 font-bold text-lg">2018</span>
+                </div>
+                <h3 class="font-bold text-emerald-900 text-lg">Akreditasi Unggul</h3>
+                <p class="text-emerald-700/70 text-sm mt-1">Meraih akreditasi A untuk seluruh jenjang pendidikan</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2024 -->
+          <div class="reveal relative flex flex-col md:flex-row items-center" style="transition-delay:0.4s">
+            <div class="md:w-1/2 md:pr-12 md:text-right mb-4 md:mb-0">
+              <div class="bg-white rounded-2xl p-6 shadow-lg border border-emerald-100/50 inline-block">
+                <div class="flex items-center gap-3 md:justify-end mb-3">
+                  <span class="text-gold-600 font-bold text-lg">2024</span>
+                  <div class="w-10 h-10 bg-gold-100 rounded-lg flex items-center justify-center">
+                    <i data-lucide="rocket" class="w-5 h-5 text-gold-600"></i>
+                  </div>
+                </div>
+                <h3 class="font-bold text-emerald-900 text-lg">Digitalisasi & SPMB</h3>
+                <p class="text-emerald-700/70 text-sm mt-1">Penerimaan peserta didik baru secara online dan modernisasi
+                  pembelajaran digital</p>
+              </div>
+            </div>
+            <div
+              class="hidden md:flex w-12 h-12 bg-gradient-to-br from-gold-400 to-gold-600 rounded-full items-center justify-center z-10 shadow-lg shrink-0 animate-pulse-glow">
+              <i data-lucide="rocket" class="w-5 h-5 text-white"></i>
+            </div>
+            <div class="md:w-1/2 md:pl-12"></div>
+          </div>
+        </div>
+
+        <!-- Photo Grid -->
+        <div class="reveal">
+          <h3 class="text-center text-emerald-900 font-bold text-2xl mb-8">Dokumentasi Kegiatan</h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="rounded-2xl overflow-hidden shadow-lg group cursor-pointer" onclick="openLightbox(5)">
+              <img src="images/hsn.JPG" alt="Tahfidz"
+                class="w-full h-40 md:h-56 object-cover warm-filter group-hover:scale-110 transition-transform duration-500">
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-lg group cursor-pointer" onclick="openLightbox(6)">
+              <img src="images/alfiah.JPG" alt=""
+                class="w-full h-40 md:h-56 object-cover warm-filter group-hover:scale-110 transition-transform duration-500">
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-lg group cursor-pointer" onclick="openLightbox(7)">
+              <img src="images/coplay.jpeg" alt="Seni"
+                class="w-full h-40 md:h-56 object-cover warm-filter group-hover:scale-110 transition-transform duration-500">
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-lg group cursor-pointer" onclick="openLightbox(8)">
+              <img src="images/futsal.jpeg" alt="Olahraga"
+                class="w-full h-40 md:h-56 object-cover warm-filter group-hover:scale-110 transition-transform duration-500">
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-lg group cursor-pointer" onclick="openLightbox(18)">
+              <img src="images/khataman 1.jpg" alt="Olahraga"
+                class="w-full h-40 md:h-56 object-cover warm-filter group-hover:scale-110 transition-transform duration-500">
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-lg group cursor-pointer" onclick="openLightbox(19)">
+              <img src="images/khataman 3.JPG" alt="Olahraga"
+                class="w-full h-40 md:h-56 object-cover warm-filter group-hover:scale-110 transition-transform duration-500">
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-lg group cursor-pointer" onclick="openLightbox(20)">
+              <img src="images/khataman2.jpg" alt="Olahraga"
+                class="w-full h-40 md:h-56 object-cover warm-filter group-hover:scale-110 transition-transform duration-500">
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-lg group cursor-pointer" onclick="openLightbox(21)">
+              <img src="images/khataman4.JPG" alt="Olahraga"
+                class="w-full h-40 md:h-56 object-cover warm-filter group-hover:scale-110 transition-transform duration-500">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+    <!-- PENDAFTARAN ONLINE -->
+    <section id="pendaftaran" class="py-24 bg-cream-50 relative overflow-hidden">
+      <div
+        class="absolute top-0 left-0 w-96 h-96 bg-emerald-100/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2">
+      </div>
+      <div class="absolute bottom-0 right-0 w-80 h-80 bg-gold-100/20 rounded-full blur-3xl translate-x-1/3"></div>
+
+      <div class="max-w-4xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16 reveal">
+          <p class="font-amiri text-gold-600 text-2xl mb-2">وَمَنْ يَتَّقِ اللَّهَ يَجْعَلْ لَهُ مَخْرَجًا</p>
+          <h2 class="text-4xl md:text-5xl font-extrabold text-emerald-900 tracking-tight">Pendaftaran Online</h2>
+          <p class="text-emerald-700/70 mt-4 text-lg">SPMB 2024/2025 — Daftarkan putra-putri Anda sekarang</p>
+          <div class="w-24 h-1 bg-gradient-to-r from-emerald-600 to-gold-500 mx-auto mt-6 rounded-full"></div>
+        </div>
+
+        <div class="reveal">
+          <form id="registrationForm"
+            class="bg-white rounded-3xl p-8 md:p-12 shadow-2xl border-2 border-emerald-100/50 relative overflow-hidden">
+            <!-- Islamic Geometric Border Decoration -->
+            <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-gold-400 via-emerald-500 to-gold-400">
+            </div>
+            <div class="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-gold-400/40 rounded-tl-lg"></div>
+            <div class="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-gold-400/40 rounded-tr-lg"></div>
+            <div class="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-gold-400/40 rounded-bl-lg"></div>
+            <div class="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-gold-400/40 rounded-br-lg"></div>
+
+            <div class="space-y-6">
+              <!-- Nama -->
+              <div>
+                <label class="block text-sm font-semibold text-emerald-800 mb-2">Nama Lengkap <span
+                    class="text-red-400">*</span></label>
+                <input type="text" required placeholder="Masukkan nama lengkap calon peserta didik"
+                  class="w-full px-5 py-3.5 bg-cream-50 border border-emerald-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition-all text-emerald-900 placeholder:text-emerald-400">
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-6">
+                <!-- Jenis Kelamin -->
+                <div>
+                  <label class="block text-sm font-semibold text-emerald-800 mb-2">Jenis Kelamin <span
+                      class="text-red-400">*</span></label>
+                  <select required
+                    class="w-full px-5 py-3.5 bg-cream-50 border border-emerald-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition-all text-emerald-900 appearance-none cursor-pointer">
+                    <option value="">Pilih Jenis Kelamin</option>
+                    <option>Laki-laki</option>
+                    <option>Perempuan</option>
+                  </select>
+                </div>
+                <!-- TTL -->
+                <div>
+                  <label class="block text-sm font-semibold text-emerald-800 mb-2">Tanggal Lahir <span
+                      class="text-red-400">*</span></label>
+                  <input type="date" required
+                    class="w-full px-5 py-3.5 bg-cream-50 border border-emerald-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition-all text-emerald-900">
+                </div>
+              </div>
+
+              <!-- Alamat -->
+              <div>
+                <label class="block text-sm font-semibold text-emerald-800 mb-2">Alamat Lengkap <span
+                    class="text-red-400">*</span></label>
+                <textarea required rows="3" placeholder="Masukkan alamat lengkap"
+                  class="w-full px-5 py-3.5 bg-cream-50 border border-emerald-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition-all text-emerald-900 placeholder:text-emerald-400 resize-none"></textarea>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-6">
+                <!-- No HP -->
+                <div>
+                  <label class="block text-sm font-semibold text-emerald-800 mb-2">No. HP / WhatsApp <span
+                      class="text-red-400">*</span></label>
+                  <input type="tel" required placeholder="08xxxxxxxxxx"
+                    class="w-full px-5 py-3.5 bg-cream-50 border border-emerald-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition-all text-emerald-900 placeholder:text-emerald-400">
+                </div>
+                <!-- Email -->
+                <div>
+                  <label class="block text-sm font-semibold text-emerald-800 mb-2">Email</label>
+                  <input type="email" placeholder="email@contoh.com"
+                    class="w-full px-5 py-3.5 bg-cream-50 border border-emerald-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition-all text-emerald-900 placeholder:text-emerald-400">
+                </div>
+              </div>
+
+              <!-- Jenjang Pendidikan -->
+              <div>
+                <label class="block text-sm font-semibold text-emerald-800 mb-2">Jenjang Pendidikan yang Dipilih <span
+                    class="text-red-400">*</span></label>
+                <select id="jenjangSelect" required onchange="toggleJurusan()"
+                  class="w-full px-5 py-3.5 bg-cream-50 border border-emerald-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition-all text-emerald-900 appearance-none cursor-pointer">
+                  <option value="">Pilih Jenjang Pendidikan</option>
+                  <option value="paud">PAUD</option>
+                  <option value="mi">MI (Madrasah Ibtidaiyah)</option>
+                  <option value="mts">MTs (Madrasah Tsanawiyah)</option>
+                  <option value="ma">MA (Madrasah Aliyah)</option>
+                  <option value="smk">SMK (Sekolah Menengah Kejuruan)</option>
+                </select>
+              </div>
+
+              <!-- Jurusan SMK (hidden by default) -->
+              <div id="jurusanField" class="hidden">
+                <label class="block text-sm font-semibold text-emerald-800 mb-2">Kompetensi Keahlian <span
+                    class="text-red-400">*</span></label>
+                <select id="jurusanSelect"
+                  class="w-full px-5 py-3.5 bg-cream-50 border border-emerald-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition-all text-emerald-900 appearance-none cursor-pointer">
+                  <option value="">Pilih Kompetensi Keahlian</option>
+                  <option value="akl">AKL — Akuntansi & Keuangan Lembaga</option>
+                  <option value="tkj">TKJ — Teknik Komputer & Jaringan</option>
+                  <option value="tbsm">TBSM — Teknik & Bisnis Sepeda Motor</option>
+                </select>
+              </div>
+
+              <!-- Nama Orang Tua -->
+              <div>
+                <label class="block text-sm font-semibold text-emerald-800 mb-2">Nama Orang Tua / Wali <span
+                    class="text-red-400">*</span></label>
+                <input type="text" required placeholder="Masukkan nama orang tua / wali"
+                  class="w-full px-5 py-3.5 bg-cream-50 border border-emerald-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition-all text-emerald-900 placeholder:text-emerald-400">
+              </div>
+
+              <!-- Pesan -->
+              <div>
+                <label class="block text-sm font-semibold text-emerald-800 mb-2">Pesan / Catatan</label>
+                <textarea rows="3" placeholder="Tulis pesan atau pertanyaan (opsional)"
+                  class="w-full px-5 py-3.5 bg-cream-50 border border-emerald-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gold-400 focus:border-transparent transition-all text-emerald-900 placeholder:text-emerald-400 resize-none"></textarea>
+              </div>
+
+              <!-- Submit -->
+              <button type="submit"
+                class="w-full py-4 bg-gradient-to-r from-emerald-700 to-emerald-800 text-white font-bold text-lg rounded-xl hover:from-emerald-800 hover:to-emerald-900 transition-all shadow-xl hover:shadow-2xl hover:scale-[1.02] flex items-center justify-center gap-3">
+                <i data-lucide="send" class="w-5 h-5"></i>
+                Kirim Pendaftaran
+              </button>
+              <p class="text-center text-emerald-600/60 text-sm">Dengan mengirim formulir ini, Anda menyetujui ketentuan
+                pendaftaran YPPMU</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- KOMENTAR PENGUNJUNG -->
+    <section id="komentar" class="py-24 bg-white relative overflow-hidden border-t border-emerald-100">
+      <div class="absolute inset-0 arabesque-bg opacity-30"></div>
+      <div class="max-w-4xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16 reveal">
+          <p class="font-amiri text-gold-600 text-2xl mb-2">تَبَادَلُوا الآرَاءَ</p>
+          <h2 class="text-4xl md:text-5xl font-extrabold text-emerald-900 tracking-tight">Komentar Pengunjung</h2>
+          <p class="text-emerald-700/70 mt-4 text-lg">Tinggalkan pesan, kesan, atau pertanyaan Anda untuk YPPMU</p>
+          <div class="w-24 h-1 bg-gradient-to-r from-emerald-600 to-gold-500 mx-auto mt-6 rounded-full"></div>
+        </div>
+
+        <div class="reveal">
+          <div class="bg-cream-50 rounded-3xl p-8 shadow-lg border border-emerald-100/50 mb-10">
+            <h3 class="font-bold text-emerald-900 text-xl mb-6">Tulis Komentar</h3>
+            <form id="commentForm" class="space-y-4">
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-semibold text-emerald-800 mb-1">Nama <span
+                      class="text-red-400">*</span></label>
+                  <input type="text" id="commentName" required placeholder="Nama Anda"
+                    class="w-full px-4 py-3 bg-white border border-emerald-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gold-400 text-emerald-900 transition-colors">
+                </div>
+                <div>
+                  <label class="block text-sm font-semibold text-emerald-800 mb-1">Status (Opsional)</label>
+                  <select id="commentRole"
+                    class="w-full px-4 py-3 bg-white border border-emerald-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gold-400 text-emerald-900 cursor-pointer transition-colors">
+                    <option value="Pengunjung">Pengunjung</option>
+                    <option value="Alumni">Alumni</option>
+                    <option value="Wali Santri">Wali Santri</option>
+                    <option value="Calon Santri">Calon Santri</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold text-emerald-800 mb-1">Komentar <span
+                    class="text-red-400">*</span></label>
+                <textarea id="commentText" required rows="3" placeholder="Tuliskan komentar Anda di sini..."
+                  class="w-full px-4 py-3 bg-white border border-emerald-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-gold-400 text-emerald-900 resize-none transition-colors"></textarea>
+              </div>
+              <button type="submit"
+                class="px-6 py-3 bg-gradient-to-r from-emerald-700 to-emerald-800 text-white font-bold rounded-xl hover:from-emerald-800 hover:to-emerald-900 transition-all shadow-md hover:shadow-lg flex items-center gap-2">
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                Kirim Komentar
+              </button>
+            </form>
+          </div>
+
+          <div class="space-y-6" id="commentsList">
+            <!-- Comments will be injected here by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-emerald-950 relative overflow-hidden">
+      <div class="absolute inset-0 arabesque-dark"></div>
+      <!-- Top border -->
+      <div class="h-1 bg-gradient-to-r from-gold-400 via-emerald-500 to-gold-400"></div>
+
+      <div class="max-w-7xl mx-auto px-6 py-16 relative z-10">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+          <!-- Logo & Info -->
+          <div class="lg:col-span-2">
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-600 to-emerald-800 flex items-center justify-center border-2 border-gold-500/50">
+                <span class="font-amiri text-gold-400 text-2xl font-bold">م</span>
+              </div>
+              <div>
+                <h3 class="text-white font-bold text-lg leading-tight">Yayasan Pondok Pesantren</h3>
+                <p class="text-gold-400 font-bold">Minhadlul Ulum</p>
+              </div>
+            </div>
+            <p class="text-emerald-200/60 leading-relaxed mb-6 max-w-md">
+              Lembaga pendidikan Islam terpadu yang mendidik generasi berilmu, berakhlak mulia, dan berprestasi sejak
+              1999. Menggabungkan kurikulum pesantren salafiyah dengan pendidikan formal modern.
+            </p>
+            <p class="font-amiri text-gold-400/60 text-xl mb-6">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h4 class="text-white font-bold text-lg mb-6 flex items-center gap-2">
+              <div class="w-2 h-2 bg-gold-500 rounded-full"></div>
+              Tautan Cepat
+            </h4>
+            <ul class="space-y-3">
+              <li><a href="#hero"
+                  class="text-emerald-200/60 hover:text-gold-400 transition-colors flex items-center gap-2"><i
+                    data-lucide="chevron-right" class="w-3 h-3"></i>Beranda</a></li>
+              <li><a href="#tentang"
+                  class="text-emerald-200/60 hover:text-gold-400 transition-colors flex items-center gap-2"><i
+                    data-lucide="chevron-right" class="w-3 h-3"></i>Tentang Kami</a></li>
+              <li><a href="#program"
+                  class="text-emerald-200/60 hover:text-gold-400 transition-colors flex items-center gap-2"><i
+                    data-lucide="chevron-right" class="w-3 h-3"></i>Program Pendidikan</a></li>
+              <li><a href="#fasilitas"
+                  class="text-emerald-200/60 hover:text-gold-400 transition-colors flex items-center gap-2"><i
+                    data-lucide="chevron-right" class="w-3 h-3"></i>Fasilitas</a></li>
+              <li><a href="#kegiatan"
+                  class="text-emerald-200/60 hover:text-gold-400 transition-colors flex items-center gap-2"><i
+                    data-lucide="chevron-right" class="w-3 h-3"></i>Kegiatan & Prestasi</a></li>
+              <li><a href="#pendaftaran"
+                  class="text-emerald-200/60 hover:text-gold-400 transition-colors flex items-center gap-2"><i
+                    data-lucide="chevron-right" class="w-3 h-3"></i>Pendaftaran</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h4 class="text-white font-bold text-lg mb-6 flex items-center gap-2">
+              <div class="w-2 h-2 bg-gold-500 rounded-full"></div>
+              Hubungi Kami
+            </h4>
+            <ul class="space-y-4">
+              <li class="flex gap-3">
+                <i data-lucide="map-pin" class="w-5 h-5 text-gold-400 shrink-0 mt-0.5"></i>
+                <span class="text-emerald-200/60">Trimulyo, Tegineneng, Pasawaran, Lampung</span>
+              </li>
+              <li class="flex gap-3">
+                <i data-lucide="phone" class="w-5 h-5 text-gold-400 shrink-0 mt-0.5"></i>
+                <span class="text-emerald-200/60">Ustzh. Eka Wulandari, S.Pd (+62 857-7650-3946)</span>
+              </li>
+              <li class="flex gap-3">
+                <i data-lucide="mail" class="w-5 h-5 text-gold-400 shrink-0 mt-0.5"></i>
+                <span class="text-emerald-200/60">info@yppmu.sch.id</span>
+              </li>
+              <li class="flex gap-3">
+                <i data-lucide="clock" class="w-5 h-5 text-gold-400 shrink-0 mt-0.5"></i>
+                <span class="text-emerald-200/60">Senin - Sabtu: 07:00 - 16:00 WIB</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Social Media -->
+        <div class="border-t border-emerald-800/50 pt-8 pb-4">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-4">
+              <a href="https://www.facebook.com/ayonyantri" target="_blank"
+                class="w-11 h-11 bg-emerald-800/50 rounded-xl flex items-center justify-center hover:bg-gold-500/20 hover:scale-110 transition-all border border-emerald-700/30">
+                <svg class="w-5 h-5 text-emerald-200/70" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                </svg>
+              </a>
+              <a href="https://www.tiktok.com/@galerippmu?lang=id-ID" target="_blank"
+                class="w-11 h-11 bg-emerald-800/50 rounded-xl flex items-center justify-center hover:bg-gold-500/20 hover:scale-110 transition-all border border-emerald-700/30">
+                <svg class="w-5 h-5 text-emerald-200/70" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.06-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.59-5.71-.29-3.27 1.74-6.49 4.81-7.73.91-.39 1.91-.58 2.91-.58.05 1.5.01 3 .01 4.51-.7-.03-1.42.06-2.07.35-.85.42-1.51 1.22-1.74 2.14-.17.75-.09 1.55.22 2.25.32.76.92 1.4 1.64 1.76.71.39 1.54.53 2.34.42 1.02-.1 1.93-.65 2.51-1.51.37-.53.58-1.17.6-1.81.04-3.53.01-7.06.02-10.59-.01-1.21-.01-2.42-.01-3.62z" />
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/kang_santri_mu/?hl=en" target="_blank"
+                class="w-11 h-11 bg-emerald-800/50 rounded-xl flex items-center justify-center hover:bg-gold-500/20 hover:scale-110 transition-all border border-emerald-700/30">
+                <svg class="w-5 h-5 text-emerald-200/70" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                </svg>
+              </a>
+              <a href="https://www.youtube.com/@kangsantrimu9567" target="_blank"
+                class="w-11 h-11 bg-emerald-800/50 rounded-xl flex items-center justify-center hover:bg-gold-500/20 hover:scale-110 transition-all border border-emerald-700/30">
+                <svg class="w-5 h-5 text-emerald-200/70" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg>
+              </a>
+            </div>
+            <p class="text-emerald-200/40 text-sm text-center md:text-right">
+              © 2024 YPPMU. Seluruh hak cipta dilindungi.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop"
+      class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-br from-emerald-700 to-emerald-800 text-white rounded-2xl shadow-xl hover:shadow-2xl hover:scale-110 transition-all z-40 opacity-0 invisible"
+      onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <i data-lucide="chevron-up" class="w-6 h-6 mx-auto"></i>
+    </button>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+      <div class="bg-white rounded-2xl shadow-2xl p-6 border border-emerald-100 flex items-center gap-4 max-w-sm">
+        <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center shrink-0">
+          <i data-lucide="check-circle" class="w-6 h-6 text-emerald-600"></i>
+        </div>
+        <div>
+          <p class="font-bold text-emerald-900">Pendaftaran Berhasil!</p>
+          <p class="text-sm text-emerald-700/70">Data Anda telah kami terima. Tim kami akan menghubungi Anda segera.</p>
+        </div>
+        <button onclick="hideToast()" class="p-1 hover:bg-emerald-50 rounded-lg shrink-0">
+          <i data-lucide="x" class="w-4 h-4 text-emerald-400"></i>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Initialize Lucide icons
+      lucide.createIcons();
+
+      // ===== NAVIGATION =====
+      const navbar = document.getElementById('navbar');
+      const menuBtn = document.getElementById('menuBtn');
+      const closeMenuBtn = document.getElementById('closeMenu');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const menuOverlay = document.getElementById('menuOverlay');
+
+      // Scroll handler for navbar
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add('bg-cream-50/95', 'backdrop-blur-lg', 'shadow-lg');
+          navbar.classList.remove('bg-transparent');
+        } else {
+          navbar.classList.remove('bg-cream-50/95', 'backdrop-blur-lg', 'shadow-lg');
+          navbar.classList.add('bg-transparent');
+        }
+
+        // Back to top button
+        const btn = document.getElementById('backToTop');
+        if (window.scrollY > 500) {
+          btn.classList.remove('opacity-0', 'invisible');
+          btn.classList.add('opacity-100', 'visible');
+        } else {
+          btn.classList.add('opacity-0', 'invisible');
+          btn.classList.remove('opacity-100', 'visible');
+        }
+
+        // Active nav link
+        updateActiveNav();
+      });
+
+      // Mobile menu
+      menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('open');
+        menuOverlay.classList.remove('hidden');
+      });
+      closeMenuBtn.addEventListener('click', closeMobileMenu);
+      menuOverlay.addEventListener('click', closeMobileMenu);
+
+      document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+      });
+
+      function closeMobileMenu() {
+        mobileMenu.classList.remove('open');
+        menuOverlay.classList.add('hidden');
+      }
+
+      // Active nav link
+      function updateActiveNav() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 100;
+          if (window.scrollY >= sectionTop) current = section.getAttribute('id');
+        });
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+        });
+      }
+
+      // ===== SCROLL REVEAL =====
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+      // ===== COUNTER ANIMATION =====
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const counters = entry.target.querySelectorAll('.counter');
+            counters.forEach(counter => {
+              const target = parseInt(counter.getAttribute('data-target'));
+              const duration = 2000;
+              const increment = target / (duration / 16);
+              let current = 0;
+              const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                  counter.textContent = target;
+                  clearInterval(timer);
+                } else {
+                  counter.textContent = Math.floor(current);
+                }
+              }, 16);
+            });
+            counterObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      const statsSection = document.querySelector('#hero .grid');
+      if (statsSection) counterObserver.observe(statsSection);
+
+      // ===== LIGHTBOX =====
+      const galleryImages = [
+        'Masjid.jpg',
+        'images/lapangan.jpg',
+        'images/kantor ma.jpg',
+        'images/lab komputer.jpeg',
+        'images/bengkel.jpg',
+        'images/hsn.JPG',
+        'images/alfiah.JPG',
+        'images/coplay.jpeg',
+        'images/futsal.jpeg',
+        'images/abh.jpg',
+        'images/ibu.jpg',
+        'images/gus a.jpg',
+        'images/gusrohim.jpg',
+        'images/keluarga.jpg',
+        'images/Kepala Sekolah.jpg',
+        'images/putra.jpg',
+        'images/putri.jpg',
+        'images/ust.jpg',
+        'images/khataman 1.jpg',
+        'images/khataman 3.JPG',
+        'images/khataman2.jpg',
+        'images/khataman4.JPG'
+      ];
+      let currentLightboxIndex = 0;
+
+      function openLightbox(index) {
+        currentLightboxIndex = index;
+        const lightbox = document.getElementById('lightbox');
+        const img = document.getElementById('lightboxImg');
+
+        img.classList.remove('scale-100', 'opacity-100');
+        img.classList.add('scale-95', 'opacity-0');
+
+        img.onload = () => {
+          img.classList.remove('scale-95', 'opacity-0');
+          img.classList.add('scale-100', 'opacity-100');
+        };
+
+        img.src = galleryImages[index];
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        const img = document.getElementById('lightboxImg');
+
+        img.classList.remove('scale-100', 'opacity-100');
+        img.classList.add('scale-95', 'opacity-0');
+
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      function navigateLightbox(dir) {
+        const img = document.getElementById('lightboxImg');
+
+        // fade out
+        img.classList.remove('scale-100', 'opacity-100');
+        img.classList.add('scale-95', 'opacity-0');
+
+        setTimeout(() => {
+          currentLightboxIndex = (currentLightboxIndex + dir + galleryImages.length) % galleryImages.length;
+
+          img.onload = () => {
+            img.classList.remove('scale-95', 'opacity-0');
+            img.classList.add('scale-100', 'opacity-100');
+          };
+
+          img.src = galleryImages[currentLightboxIndex];
+        }, 300); // Wait for fade out to complete
+      }
+
+      // Keyboard navigation for lightbox
+      document.addEventListener('keydown', (e) => {
+        if (!document.getElementById('lightbox').classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') navigateLightbox(-1);
+        if (e.key === 'ArrowRight') navigateLightbox(1);
+      });
+
+      // ===== VIDEO PLAY =====
+      function playVideo(el) {
+        // In production, this would open an actual video player
+        const title = el.closest('.rounded-3xl, .rounded-2xl')?.querySelector('p')?.textContent || 'Video';
+        alert('Video akan diputar: ' + title + '\n\n(Ganti dengan video player sesungguhnya di production)');
+      }
+
+      // ===== FORM =====
+      function toggleJurusan() {
+        const jenjang = document.getElementById('jenjangSelect').value;
+        const jurusanField = document.getElementById('jurusanField');
+        if (jenjang === 'smk') {
+          jurusanField.classList.remove('hidden');
+          document.getElementById('jurusanSelect').setAttribute('required', '');
+        } else {
+          jurusanField.classList.add('hidden');
+          document.getElementById('jurusanSelect').removeAttribute('required');
+          document.getElementById('jurusanSelect').value = '';
+        }
+      }
+
+      document.getElementById('registrationForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        showToast();
+        this.reset();
+        document.getElementById('jurusanField').classList.add('hidden');
+      });
+
+      // ===== TOAST =====
+      function showToast() {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => hideToast(), 5000);
+      }
+
+      function hideToast() {
+        document.getElementById('toast').classList.remove('show');
+      }
+
+      // Re-create icons after DOM is ready
+      setTimeout(() => lucide.createIcons(), 100);
+    </script>
+  </body>
+
+
+  </html>
