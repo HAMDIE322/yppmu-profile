@@ -266,6 +266,64 @@
     .counter {
       display: inline-block;
     }
+
+    /* Music Button */
+    .music-btn {
+      position: fixed;
+      top: 6rem;
+      right: 2rem;
+      width: 3.5rem;
+      height: 3.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(212, 168, 83, 0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 40;
+      transition: all 0.3s ease;
+      color: #D4A853;
+    }
+
+    .music-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
+      border-color: #D4A853;
+    }
+
+    .music-btn.playing {
+      animation: rotate-music 4s linear infinite;
+      box-shadow: 0 0 15px rgba(212, 168, 83, 0.4);
+    }
+
+    @keyframes rotate-music {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .music-waves {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 12px;
+    }
+
+    .music-waves span {
+      width: 2px;
+      background: #D4A853;
+      border-radius: 1px;
+      animation: music-wave 1s ease-in-out infinite;
+    }
+
+    .music-waves span:nth-child(2) { animation-delay: 0.2s; }
+    .music-waves span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes music-wave {
+      0%, 100% { height: 4px; }
+      50% { height: 12px; }
+    }
   </style>
 </head>
 
@@ -751,7 +809,7 @@
               <div class="w-10 h-10 bg-gold-500/20 rounded-lg flex items-center justify-center backdrop-blur-sm">
                 <i data-lucide="moon" class="w-5 h-5 text-gold-400"></i>
               </div>
-              <h3 class="text-white font-bold text-2xl">Masjid AL- IKHLAS</h3>
+              <h3 class="text-white font-bold text-2xl">Masjid Al-Mukarram</h3>
             </div>
             <p class="text-cream-200/70 text-sm">Tempat ibadah dan pembinaan spiritual santri</p>
           </div>
@@ -2041,6 +2099,31 @@
       </div>
     </footer>
 
+    <!-- Background Music -->
+    <audio id="bgMusic" src="mars MU.mp3" loop autoplay></audio>
+    <button id="musicToggle" class="music-btn" title="Toggle Music">
+      <div id="musicIcon" class="flex items-center justify-center">
+        <i data-lucide="music" class="w-6 h-6"></i>
+      </div>
+      <div id="musicWaves" class="music-waves hidden">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+
+    <!-- Auto Scroll Toggle -->
+    <button id="autoScrollToggle" class="fixed bottom-36 right-8 w-14 h-14 bg-white/20 backdrop-blur-md text-gold-500 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-110 transition-all z-40 border border-gold-500/30" title="Auto Scroll">
+      <i data-lucide="play" id="scrollIcon" class="w-6 h-6 mx-auto"></i>
+    </button>
+
+    <!-- Scroll to Bottom Button -->
+    <button id="scrollToBottom"
+      class="fixed bottom-24 right-8 w-14 h-14 bg-white/20 backdrop-blur-md text-gold-500 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-110 transition-all z-40 border border-gold-500/30"
+      onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})">
+      <i data-lucide="chevron-down" class="w-6 h-6 mx-auto"></i>
+    </button>
+
     <!-- Back to Top Button -->
     <button id="backToTop"
       class="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-br from-emerald-700 to-emerald-800 text-white rounded-2xl shadow-xl hover:shadow-2xl hover:scale-110 transition-all z-40 opacity-0 invisible"
@@ -2085,14 +2168,24 @@
           navbar.classList.add('bg-transparent');
         }
 
-        // Back to top button
-        const btn = document.getElementById('backToTop');
+        // Back to top & scroll to bottom buttons
+        const btnTop = document.getElementById('backToTop');
+        const btnBottom = document.getElementById('scrollToBottom');
+        
         if (window.scrollY > 500) {
-          btn.classList.remove('opacity-0', 'invisible');
-          btn.classList.add('opacity-100', 'visible');
+          btnTop.classList.remove('opacity-0', 'invisible');
+          btnTop.classList.add('opacity-100', 'visible');
         } else {
-          btn.classList.add('opacity-0', 'invisible');
-          btn.classList.remove('opacity-100', 'visible');
+          btnTop.classList.add('opacity-0', 'invisible');
+          btnTop.classList.remove('opacity-100', 'visible');
+        }
+
+        if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 500) {
+          btnBottom.classList.add('opacity-0', 'invisible');
+          btnBottom.classList.remove('opacity-100', 'visible');
+        } else {
+          btnBottom.classList.remove('opacity-0', 'invisible');
+          btnBottom.classList.add('opacity-100', 'visible');
         }
 
         // Active nav link
@@ -2291,6 +2384,135 @@
       function hideToast() {
         document.getElementById('toast').classList.remove('show');
       }
+
+      // ===== BACKGROUND MUSIC =====
+      const bgMusic = document.getElementById('bgMusic');
+      const musicToggle = document.getElementById('musicToggle');
+      const musicIcon = document.getElementById('musicIcon');
+      const musicWaves = document.getElementById('musicWaves');
+      let isMusicPlaying = false;
+
+      musicToggle.addEventListener('click', () => {
+        if (isMusicPlaying) {
+          bgMusic.pause();
+          musicIcon.classList.remove('hidden');
+          musicWaves.classList.add('hidden');
+          musicToggle.classList.remove('playing');
+        } else {
+          bgMusic.play().catch(err => console.log("Autoplay blocked or error:", err));
+          musicIcon.classList.add('hidden');
+          musicWaves.classList.remove('hidden');
+          musicToggle.classList.add('playing');
+        }
+        isMusicPlaying = !isMusicPlaying;
+      });
+
+      // Try to play on first interaction
+      const startMusic = () => {
+        if (!isMusicPlaying) {
+          musicToggle.click();
+        }
+        // Remove listeners after first interaction
+        document.removeEventListener('click', startMusic);
+        document.removeEventListener('scroll', startMusic);
+        document.removeEventListener('touchstart', startMusic);
+      };
+
+      document.addEventListener('click', startMusic);
+      document.addEventListener('scroll', startMusic);
+      document.addEventListener('touchstart', startMusic);
+
+      // ===== AUTO SCROLL =====
+      let isAutoScrolling = false;
+      let scrollInterval;
+      const scrollBtn = document.getElementById('autoScrollToggle');
+      const scrollIcon = document.getElementById('scrollIcon');
+
+      scrollBtn.addEventListener('click', () => {
+        if (isAutoScrolling) {
+          clearInterval(scrollInterval);
+          scrollIcon.setAttribute('data-lucide', 'play');
+          scrollBtn.classList.remove('bg-gold-500', 'text-white');
+          scrollBtn.classList.add('bg-white/20', 'text-gold-500');
+        } else {
+          scrollInterval = setInterval(() => {
+            window.scrollBy({ top: 1, behavior: 'auto' });
+            if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+              clearInterval(scrollInterval);
+              isAutoScrolling = false;
+              scrollIcon.setAttribute('data-lucide', 'play');
+              lucide.createIcons();
+            }
+          }, 20);
+          scrollIcon.setAttribute('data-lucide', 'pause');
+          scrollBtn.classList.remove('bg-white/20', 'text-gold-500');
+          scrollBtn.classList.add('bg-gold-500', 'text-white');
+        }
+        isAutoScrolling = !isAutoScrolling;
+        lucide.createIcons();
+      });
+
+      // ===== COMMENTS SYSTEM =====
+      const commentForm = document.getElementById('commentForm');
+      const commentsList = document.getElementById('commentsList');
+
+      // Load comments from localStorage
+      function loadComments() {
+        const comments = JSON.parse(localStorage.getItem('ppmu_comments') || '[]');
+        commentsList.innerHTML = comments.length ? '' : '<p class="text-center text-emerald-600/40 py-8">Belum ada komentar. Jadilah yang pertama!</p>';
+        
+        comments.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(comment => {
+          const commentEl = document.createElement('div');
+          commentEl.className = 'bg-white rounded-2xl p-6 shadow-sm border border-emerald-50 reveal visible';
+          commentEl.innerHTML = `
+            <div class="flex justify-between items-start mb-4">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-700 font-bold">
+                  ${comment.name.charAt(0).toUpperCase()}
+                </div>
+                <div>
+                  <h4 class="font-bold text-emerald-900">${comment.name}</h4>
+                  <p class="text-xs text-gold-600 font-medium">${comment.role || 'Pengunjung'}</p>
+                </div>
+              </div>
+              <span class="text-xs text-emerald-400">${new Date(comment.date).toLocaleDateString('id-ID')}</span>
+            </div>
+            <p class="text-emerald-800/80 leading-relaxed">${comment.text}</p>
+          `;
+          commentsList.appendChild(commentEl);
+        });
+      }
+
+      commentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('commentName').value;
+        const role = document.getElementById('commentRole').value;
+        const text = document.getElementById('commentText').value;
+        
+        const newComment = {
+          id: Date.now(),
+          name,
+          role,
+          text,
+          date: new Date().toISOString()
+        };
+
+        const comments = JSON.parse(localStorage.getItem('ppmu_comments') || '[]');
+        comments.push(newComment);
+        localStorage.setItem('ppmu_comments', JSON.stringify(comments));
+        
+        commentForm.reset();
+        loadComments();
+        
+        // Show success toast (optional, if toast logic exists)
+        if (typeof showToast === 'function') {
+          // You might want to update the toast message for comments
+          showToast(); 
+        }
+      });
+
+      // Initial load
+      loadComments();
 
       // Re-create icons after DOM is ready
       setTimeout(() => lucide.createIcons(), 100);
